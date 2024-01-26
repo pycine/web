@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قاطع </title>
+    <style>
+        body {
+            font-family: 'Tajawal',sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 5%;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -10px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            width: calc(33.33% - 20px); /* 3 cards per row with some spacing */
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card-logo img {
+            width: 100px; /* Adjust the width of the logo as needed */
+            height: auto;
+        }
+
+        .card-link {
+            text-align: center;
+        }
+
+        .card-link a {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .card-link a:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 968px) {
+            .card {
+                width: calc(50% - 20px); /* 2 cards per row for smaller screens */
+            }
+        }
+
+        @media (max-width: 680px) {
+            .card {
+                width: calc(100% - 20px); /* 1 card per row for even smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const cardData = [
+        {
+                logo: 'images/clothes.png',
+                link: 'clothes.html',
+                buttonText: 'الملابس',
+            },
+            {
+                logo: 'images/diet.png',
+                link: '',
+                buttonText: ' المواد الغذائية', // Replace with your custom text
+            },
+     {
+                logo: 'images/soft-drink.png',
+                link: '',
+                buttonText: ' المشروبات', // Replace with your custom text
+            },
+
+        
+
+            // ... (repeat for all cards)
+        ];
+
+        const container = document.body;
+
+        cardData.forEach((entry, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-logo">
+                        <img src="${entry.logo}" alt="Logo ${index + 1}">
+                    </div>
+                    <div class="card-link">
+                        <a href="${entry.link}" target="_self">${entry.buttonText}</a>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>

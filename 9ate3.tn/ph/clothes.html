@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pop.css">
+    <title>قاطع </title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background: #dbdddf;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top: 5%;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -10px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            width: 40%;
+             /* 3 cards per row with some spacing */
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+        
+            padding: 30px;
+        }
+
+        .card-logo {
+    text-align: center;
+    margin-bottom: 20px;
+    height: 100px; /* Set a fixed height for the container */
+}
+
+.card-logo img {
+    width: auto;
+    height: 100%; /* Make sure the image takes the full height of the container */
+    object-fit: contain; /* Maintain the aspect ratio without cropping */
+}
+
+
+        .card-link {
+            text-align: center;
+        }
+
+        .card-link button {
+            background: #007bff;
+            color: #fff;
+            padding-top: 10;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .card-link button:hover {
+            background: #0056b3;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .close-btn {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .close-btn:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 968px) {
+            .card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .card {
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+        <!-- Cards will be dynamically generated here -->
+    </div>
+
+    <!-- Popup container -->
+    <div class="popup-container">
+        <div class="popup-box">
+            <h1 id="popup-title"></h1>
+            <p id="popup-text"></p>
+            <button class="close-btn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const cardData = [
+            {
+                logo: 'images/Zara.png',
+                name:'zara',
+                buttonText: 'ZARA',
+                popupContent: {
+                    title: 'ZARA Popup',
+                    text: 'Lorem ipsum for ZARA.',
+                },
+            },
+            {
+                logo: 'images/Bershka.png',
+                buttonText: 'Bershka',
+                popupContent: {
+                    title: 'Bershka Popup',
+                    text: 'Lorem ipsum for Bershka.',
+                },
+            },
+            
+            {
+                logo: 'images/pull.png',
+                buttonText: 'PULL&BEAR',
+                popupContent: {
+                    title: 'Bershka Popup',
+                    text: 'Lorem ipsum for Bershka.',
+                },
+            },
+            {
+                logo: 'images/adidas.png',
+                buttonText: 'ADIDAS',
+                popupContent: {
+                    title: 'المشروبات Popup',
+                    text: 'Lorem ipsum for المشروبات.',
+                },
+            },
+            {
+                logo: 'images/puma.png',
+                buttonText: 'PUMA',
+                popupContent: {
+                    title: 'Bershka Popup',
+                    text: 'Lorem ipsum for Bershka.',
+                },
+            },
+            // ... (repeat for all cards)
+        ];
+
+        const container = document.querySelector('.card-container');
+        const popupContainer = document.querySelector('.popup-container');
+        const closePopupButton = document.querySelector('.close-btn');
+
+        cardData.forEach((entry, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-logo">
+                        <img src="${entry.logo}" alt="Logo ${index + 1}">
+                    </div>
+                    <div class="card-link">
+                        <button class="show-popup" data-title="${entry.popupContent.title}" data-text="${entry.popupContent.text}">${entry.buttonText}</button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+
+        document.body.addEventListener('click', (event) => {
+            if (event.target.classList.contains('show-popup')) {
+                const title = event.target.getAttribute('data-title');
+                const text = event.target.getAttribute('data-text');
+
+                // Set popup content based on the clicked card
+                document.getElementById('popup-title').textContent = title;
+                document.getElementById('popup-text').textContent = text;
+
+                // Display the popup
+                popupContainer.style.display = 'flex'; // Use 'flex' to center align
+            }
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            popupContainer.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

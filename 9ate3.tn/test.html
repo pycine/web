@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card h2 {
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .card:hover h2 {
+            color: #458ff6; /* Change the text color when hovering over the card */
+        }
+
+        .card h2:before {
+            content: "";
+            position: absolute;
+            height: 3px;
+            width: 0%;
+            background: #458ff6;
+            bottom: 0;
+            left: 0;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover h2:before {
+            width: 100%; /* Expand the line under the text when hovering over the card */
+        }
+
+        .card p {
+            font-size: 1rem;
+        }
+
+        .download-button {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer; /* Add cursor pointer for the button */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .download-button:hover + .dropdown .dropdown-content {
+            display: block; /* Show dropdown when the button is hovered */
+        }
+    </style>
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.getElementById("dropdown-menu");
+            dropdown.classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.download-button')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h2>Card Title</h2>
+            <p>This is some card content.</p>
+            <button class="download-button" onclick="toggleDropdown()">Download</button>
+            <div class="dropdown-content" id="dropdown-menu">
+                <a href="#">Option 1</a>
+                <a href="#">Option 2</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more cards as needed -->
+</body>
+
+    <!-- Add more cards as needed -->
+</body>
+</html>
